@@ -1,0 +1,276 @@
+{
+	"info": {
+		"_postman_id": "12345678-1234-1234-1234-123456789012",
+		"name": "Job Bidding API",
+		"description": "Collection for testing Job Bidding API endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"password\": \"123456\",\n    \"role\": \"employer\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/register",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "register"]
+						}
+					}
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"john@example.com\",\n    \"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "login"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Jobs",
+			"item": [
+				{
+					"name": "Get All Jobs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/jobs",
+							"host": ["{{base_url}}"],
+							"path": ["api", "jobs"]
+						}
+					}
+				},
+				{
+					"name": "Get Single Job",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/jobs/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "jobs", ":id"]
+						}
+					}
+				},
+				{
+					"name": "Create Job",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Full Stack Developer Needed\",\n    \"description\": \"Looking for an experienced developer\",\n    \"budget\": 5000,\n    \"duration\": 30,\n    \"skillsRequired\": [\"React\", \"Node.js\", \"MongoDB\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/jobs",
+							"host": ["{{base_url}}"],
+							"path": ["api", "jobs"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Bids",
+			"item": [
+				{
+					"name": "Get Bids for Job",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/bids/:jobId",
+							"host": ["{{base_url}}"],
+							"path": ["api", "bids", ":jobId"]
+						}
+					}
+				},
+				{
+					"name": "Create Bid",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bidAmount\": 4500,\n    \"timeline\": 25,\n    \"message\": \"I can complete this project\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/bids/:jobId",
+							"host": ["{{base_url}}"],
+							"path": ["api", "bids", ":jobId"]
+						}
+					}
+				},
+				{
+					"name": "Accept Bid",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/bids/:bidId/accept",
+							"host": ["{{base_url}}"],
+							"path": ["api", "bids", ":bidId", "accept"]
+						}
+					}
+				},
+				{
+					"name": "Reject Bid",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/bids/:bidId/reject",
+							"host": ["{{base_url}}"],
+							"path": ["api", "bids", ":bidId", "reject"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Messages",
+			"item": [
+				{
+					"name": "Get Users for Sidebar",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/messages/users",
+							"host": ["{{base_url}}"],
+							"path": ["api", "messages", "users"]
+						}
+					}
+				},
+				{
+					"name": "Get Messages with User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/messages/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "messages", ":id"]
+						}
+					}
+				},
+				{
+					"name": "Send Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"Hello, how are you?\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/messages/send/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "messages", "send", ":id"]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+} 
